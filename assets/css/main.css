@@ -2105,14 +2105,21 @@ input, select, textarea {
 			position: relative;
 			color: #fff;
 			font-weight: 600;
-			font-size: 1em;
-			line-height: 1em;
+			font-size: 1.5em;
+			line-height: 1.5em;
+		}
+		#logo h2 {
+			position: relative;
+			color: #fff;
+			font-size: 0.8em;
+			line-height: 1.25em;
+			text-align: left;
 		}
 
 		#logo p {
 			position: relative;
 			display: block;
-			font-size: 0.6em;
+			font-size: 0.8em;
 			color: rgba(255, 255, 255, 0.5);
 			line-height: 1.25em;
 			margin: 0.5em 0 0 0;
@@ -2270,25 +2277,26 @@ input, select, textarea {
 		/* Basic */
 
 			body, input, textarea, select {
-				font-size: 17pt;
+				font-size: 14pt;
 			}
 
 		/* Header */
 
 			#header {
-				width: 300px;
+				width: 250px;
 			}
 
 		/* Footer */
 
 			#footer {
-				margin-left: 300px;
+				margin-left: 250px;
 			}
 
 		/* Main */
 
 			#main {
-				margin-left: 300px;
+			    margin-left: 250px;
+			    font-size: 18pt;
 			}
 
 	}
@@ -2316,7 +2324,7 @@ input, select, textarea {
 		/* Basic */
 
 			body, input, textarea, select {
-				font-size: 16pt;
+				font-size: 14pt;
 			}
 
 			.container {
@@ -2371,7 +2379,8 @@ input, select, textarea {
 		/* Main */
 
 			#main {
-				margin-left: 20%;
+			    margin-left: 20%;
+			    font-size: 16pt;
 			}
 
 	}
@@ -2391,7 +2400,7 @@ input, select, textarea {
 			}
 
 			body, input, textarea, select {
-				font-size: 16pt;
+				font-size: 14pt;
 			}
 
 			header br {
@@ -2422,10 +2431,10 @@ input, select, textarea {
 				-webkit-backface-visibility: hidden;
 				-ms-backface-visibility: hidden;
 				backface-visibility: hidden;
-				-moz-transform: translateX(-275px);
-				-webkit-transform: translateX(-275px);
-				-ms-transform: translateX(-275px);
-				transform: translateX(-275px);
+				-moz-transform: translateX(-250px);
+				-webkit-transform: translateX(-250px);
+				-ms-transform: translateX(-250px);
+				transform: translateX(-250px);
 				-moz-transition: -moz-transform 0.5s ease;
 				-webkit-transition: -webkit-transform 0.5s ease;
 				-ms-transition: -ms-transform 0.5s ease;
@@ -2437,9 +2446,9 @@ input, select, textarea {
 				overflow-y: auto;
 				position: fixed;
 				top: 0;
-				width: 275px;
+				width: 250px;
 				z-index: 10002;
-				width: 275px;
+				width: 250px;
 				background: #222729 url("images/overlay.png");
 				box-shadow: inset -0.25em 0 0.25em 0 rgba(0, 0, 0, 0.125);
 			}
@@ -2451,17 +2460,17 @@ input, select, textarea {
 				#header .bottom {
 					border-top: solid 1px rgba(255, 255, 255, 0.05);
 					box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.15);
-					padding-top: 2em;
-					margin-top: 2em;
+					padding-top: 0em;
+					margin-top: 0em;
 					position: relative;
 				}
 
 			#logo {
-				margin: 1.5em 1.25em 1.25em 1.25em;
+			    margin: 1.75em 1.5em 1.5em 1.5em;
 			}
 
 			#nav ul li a {
-				padding: 0.5em 1.25em 0.5em 1.25em;
+				padding: 0.5em 1.5em 0.5em 1.5em;
 			}
 
 			#headerToggle {
@@ -2524,17 +2533,17 @@ input, select, textarea {
 					}
 
 			body.header-visible #main {
-				-moz-transform: translateX(275px);
-				-webkit-transform: translateX(275px);
-				-ms-transform: translateX(275px);
-				transform: translateX(275px);
+				-moz-transform: translateX(250px);
+				-webkit-transform: translateX(250px);
+				-ms-transform: translateX(250px);
+				transform: translateX(250px);
 			}
 
 			body.header-visible #headerToggle {
-				-moz-transform: translateX(275px);
-				-webkit-transform: translateX(275px);
-				-ms-transform: translateX(275px);
-				transform: translateX(275px);
+				-moz-transform: translateX(250px);
+				-webkit-transform: translateX(250px);
+				-ms-transform: translateX(250px);
+				transform: translateX(250px);
 			}
 
 			body.header-visible #header {
