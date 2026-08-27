@@ -2706,3 +2706,441 @@ input, select, textarea {
 	  width: 30%;
       }
 
+
+/* News flash (top of Research > Details)
+   Dark panel in the sidebar's charcoal, so it reads instantly against the pale
+   section: drifting gradient, a white shimmer sweeping across it, a breathing
+   grey glow, and a pulsing star. All motion stops under prefers-reduced-motion. */
+
+      .news-flash {
+	  position: relative;
+	  overflow: hidden;
+	  margin: 0 0 2.5em 0;
+	  padding: 22px 28px;
+	  text-align: center;
+	  background: linear-gradient(115deg, #1b1f21 0%, #2b3236 30%, #35403f 50%, #2b3236 70%, #1b1f21 100%);
+	  background-size: 300% 100%;
+	  border: solid 1px rgba(190, 190, 190, 0.45);
+	  border-radius: 4px;
+	  animation: news-drift 12s ease-in-out infinite, news-glow 3.2s ease-in-out infinite;
+      }
+
+      /* Sweeps behind the badge and text, which are lifted to z-index 1. */
+      .news-flash:before {
+	  content: '';
+	  position: absolute;
+	  top: -60%;
+	  left: 0;
+	  width: 40%;
+	  height: 220%;
+	  pointer-events: none;
+	  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.22) 50%, rgba(255, 255, 255, 0) 100%);
+	  transform: translateX(-160%) rotate(18deg);
+	  animation: news-sweep 4.5s ease-in-out infinite;
+      }
+
+      @keyframes news-drift {
+	  0%, 100% { background-position:   0% 50%; }
+	  50%      { background-position: 100% 50%; }
+      }
+
+      @keyframes news-glow {
+	  0%, 100% { box-shadow: 0 4px 16px rgba(34, 38, 41, 0.22), 0 0 0 0 rgba(150, 150, 150, 0); }
+	  50%      { box-shadow: 0 4px 24px rgba(34, 38, 41, 0.28), 0 0 22px 3px rgba(150, 150, 150, 0.55); }
+      }
+
+      @keyframes news-sweep {
+	  0%        { transform: translateX(-160%) rotate(18deg); }
+	  55%, 100% { transform: translateX( 340%) rotate(18deg); }
+      }
+
+      .news-flash__text {
+	  position: relative;
+	  z-index: 1;
+	  margin: 0;
+	  font-size: 0.95em;
+	  line-height: 1.65;
+	  color: rgba(255, 255, 255, 0.92);
+      }
+
+      .news-flash__text a {
+	  color: #c8c8c8;
+	  border-bottom-color: rgba(200, 200, 200, 0.5);
+      }
+
+      .news-flash__text a:hover {
+	  color: #fff;
+      }
+
+      /* Last block in a section (Loop-the-Loop): the section's own bottom
+	 padding already gives it air, so drop the callout's margin. */
+      .news-flash--bottom {
+	  margin-bottom: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+	  .news-flash, .news-flash:before {
+	      animation: none;
+	  }
+
+      }
+
+      @media screen and (max-width: 736px) {
+
+	  .news-flash {
+	      padding: 18px;
+	  }
+
+      }
+
+/* Project cards + popup (Research > Details)
+   ------------------------------------------------------------------
+   Each .project-card is a button; its full text lives in the <template>
+   next to it and is cloned into #project-modal on click. See
+   assets/js/projects.js. */
+
+      /* Sits between inline #floatedL/#floatedR blocks, so it must clear them.
+	 Six tracks with every card spanning two gives three cards per row and
+	 leaves half-card steps for centring a short last row (see below). */
+      .project-grid {
+	  clear: both;
+	  display: grid;
+	  grid-template-columns: repeat(6, minmax(0, 1fr));
+	  gap: 22px;
+	  text-align: left;
+	  padding-top: 2em;
+	  margin: 0 0 2.5em 0;
+      }
+
+      /* Required: the template's "section, article { margin: 0 0 2em 0 }" would give
+	 every card but the last a bottom margin, and grid stretch subtracts margins,
+	 so the cards would end up unequal heights. */
+      .project-card {
+	  margin: 0;
+	  grid-column: span 2;
+      }
+
+      /* Centre a short last row: with 3n+2 cards the last two start on tracks
+	 2 and 4 (the current 3 + 2 layout); with 3n+1 cards the last one starts
+	 on track 3. A full row of three needs nothing. */
+      @media screen and (min-width: 961px) {
+
+	  .project-card:nth-last-child(2):nth-child(3n+1) {
+	      grid-column: 2 / span 2;
+	  }
+
+	  .project-card:last-child:nth-child(3n+2) {
+	      grid-column: 4 / span 2;
+	  }
+
+	  .project-card:last-child:nth-child(3n+1) {
+	      grid-column: 3 / span 2;
+	  }
+
+      }
+
+      .project-card__button {
+	  display: flex;
+	  flex-direction: column;
+	  width: 100%;
+	  height: 100%;
+	  padding: 0;
+	  cursor: pointer;
+	  text-align: left;
+	  font-family: inherit;
+	  font-size: 1em;
+	  color: inherit;
+	  background: #fff;
+	  border: solid 1px rgba(128, 128, 128, 0.2);
+	  border-radius: 4px;
+	  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+      }
+
+      .project-card__button:hover {
+	  transform: translateY(-3px);
+	  background: #f0f0f0;
+	  border-color: rgba(128, 128, 128, 0.45);
+	  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-card__button:focus-visible {
+	  outline: solid 2px #8ebebc;
+	  outline-offset: 2px;
+      }
+
+      .project-card__title {
+	  display: block;
+	  padding: 17px 17px 0 17px;
+	  font-size: 1em;
+	  font-weight: 600;
+	  line-height: 1.35;
+	  color: #41484c;
+      }
+
+      .project-card__summary {
+	  display: block;
+	  flex-grow: 1;
+	  padding: 7px 17px 17px 17px;
+	  font-size: 0.85em;
+	  line-height: 1.55;
+	  color: #666;
+      }
+
+      /* The dialog is only a frame -- showModal() centres it and paints ::backdrop;
+	 __surface carries the panel and caps its height. */
+      .project-modal {
+	  width: 100%;
+	  max-width: 920px;
+	  padding: 0;
+	  border: 0;
+	  background: transparent;
+      }
+
+      .project-modal::backdrop {
+	  background: rgba(35, 41, 45, 0.55);
+      }
+
+      .project-modal__surface {
+	  display: flex;
+	  flex-direction: column;
+	  max-height: calc(100vh - 60px);
+	  overflow: hidden;
+	  text-align: left;
+	  background: #fff;
+	  border-radius: 4px;
+	  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+      }
+
+      .project-modal__bar {
+	  display: flex;
+	  align-items: center;
+	  justify-content: space-between;
+	  gap: 20px;
+	  padding: 16px 25px;
+	  background: #222629 url("images/overlay.png");
+	  color: #fff;
+      }
+
+      /* Beats the base "strong, b { color: #666 }" rule. */
+      .project-modal__bar strong {
+	  display: block;
+	  font-size: 1.2em;
+	  font-weight: 600;
+	  color: #fff;
+      }
+
+      .project-modal__close {
+	  flex-shrink: 0;
+	  padding: 6px 14px;
+	  font-family: inherit;
+	  font-size: 0.8em;
+	  color: #fff;
+	  cursor: pointer;
+	  background: transparent;
+	  border: solid 1px rgba(255, 255, 255, 0.7);
+	  border-radius: 3px;
+	  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+      }
+
+      .project-modal__close:hover {
+	  color: #222629;
+	  background: #fff;
+      }
+
+      /* Holds the autofocus (so no ring is drawn on Close) and scrolls the text.
+	 overscroll-behavior stops that scrolling chaining out to the page behind,
+	 which stays scrollable by design. :after clears the floated figure. */
+      .project-modal__body {
+	  padding: 25px;
+	  overflow-y: auto;
+	  overscroll-behavior: contain;
+	  color: #555;
+      }
+
+      .project-modal__body:focus {
+	  outline: none;
+      }
+
+      .project-modal__body:after {
+	  content: '';
+	  display: block;
+	  clear: both;
+      }
+
+      .project-modal__body p {
+	  line-height: 1.8;
+	  margin: 0;
+      }
+
+      /* overflow gives the list its own formatting context, so it sits beside the
+	 floated figure instead of running its background under it. */
+      .project-modal__body ul {
+	  overflow: hidden;
+	  list-style: none;
+	  padding: 12px 18px;
+	  margin: 0 0 1.5em 0;
+	  background: #f2f2f2;
+	  border-radius: 3px;
+      }
+
+      /* Muted against the #555 prose; links inherit it and keep their dotted underline. */
+      .project-modal__body ul li {
+	  padding: 4px 0;
+	  font-size: 0.95em;
+	  color: #808080;
+      }
+
+      .project-modal__figure {
+	  float: right;
+	  width: 38%;
+	  margin: 0 0 1.25em 1.5em;
+      }
+
+      .project-modal__figure figcaption {
+	  text-align: center;
+	  font-size: 12px;
+      }
+
+      @media screen and (max-width: 960px) {
+
+	  /* Two per row; an odd last card stretches across both columns. */
+	  .project-grid {
+	      grid-template-columns: repeat(4, minmax(0, 1fr));
+	  }
+
+	  .project-card:last-child:nth-child(odd) {
+	      grid-column: 1 / -1;
+	  }
+
+      }
+
+      @media screen and (max-width: 736px) {
+
+	  /* One per row (1 / -1 above is the same width here). */
+	  .project-grid {
+	      grid-template-columns: repeat(2, minmax(0, 1fr));
+	  }
+
+	  .project-modal {
+	      max-width: calc(100vw - 24px);
+	  }
+
+	  .project-modal__surface {
+	      max-height: calc(100vh - 24px);
+	  }
+
+	  /* Stacked, and capped so it does not fill the first screen on its own. */
+	  .project-modal__figure {
+	      float: none;
+	      width: 100%;
+	      margin: 0 0 1.25em 0;
+	  }
+
+	  .project-modal__figure img.image.fit {
+	      width: auto;
+	      max-width: 100%;
+	      max-height: 220px;
+	      margin: 0 auto;
+	  }
+
+      }
+
+/* Loop-the-Loop posters
+   ------------------------------------------------------------------
+   The three edition posters sit side by side above the combined write-up;
+   each is an <a> to that edition's workshop page. Not floated, so the
+   prose below simply starts underneath. Same hover lift as the project
+   cards. Full container width, three-up at every width - the posters are
+   the same aspect ratio, so they always line up; only the gap tightens on
+   phones. */
+
+      .poster-row {
+	  display: grid;
+	  grid-template-columns: repeat(3, minmax(0, 1fr));
+	  gap: 2em;
+	  margin: 0 0 2.5em 0;
+      }
+
+      /* Flex column so the caption can take whatever height is left below the
+	 poster: the grid stretches all three cards to the tallest one, and this
+	 keeps a one-line caption vertically centred beside a two-line one. */
+      .poster-row__item {
+	  display: flex;
+	  flex-direction: column;
+	  border: solid 1px rgba(128, 128, 128, 0.2);
+	  border-bottom: solid 1px rgba(128, 128, 128, 0.2);   /* beats the dotted underline on a */
+	  border-radius: 4px;
+	  overflow: hidden;
+	  background: #fff;
+	  color: inherit;
+	  -moz-transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+	  -webkit-transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+	  -ms-transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+	  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+      }
+
+      .poster-row__item:hover,
+      .poster-row__item:focus-visible {
+	  transform: translateY(-3px);
+	  border-color: rgba(142, 190, 188, 0.9);
+	  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), 0 0 0 3px rgba(142, 190, 188, 0.25);
+      }
+
+      /* Full width of its cell (the template's .image.fit is 90%). The three
+	 posters are all roughly A-series but not identically so; pinning them to
+	 one aspect box (cropping at most ~1% at an edge) keeps the captions on
+	 the same baseline. */
+      .poster-row__item img.image.fit {
+	  flex-shrink: 0;
+	  width: 100%;
+	  margin: 0;
+	  aspect-ratio: 707 / 1000;
+	  object-fit: cover;
+      }
+
+      .poster-row__caption {
+	  display: flex;
+	  flex: 1 1 auto;
+	  flex-direction: column;
+	  justify-content: center;
+	  padding: 0.4em 0.5em 0.5em 0.5em;
+	  text-align: center;
+	  font-size: 0.9em;
+	  line-height: 1.3;
+	  color: #666;
+	  border-top: solid 1px rgba(128, 128, 128, 0.15);
+      }
+
+      /* Second caption line (the venue on the third poster). */
+      .poster-row__caption font {
+	  display: block;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+	  .poster-row__item {
+	      transition: none;
+	  }
+
+	  .poster-row__item:hover,
+	  .poster-row__item:focus-visible {
+	      transform: none;
+	  }
+
+      }
+
+      @media screen and (max-width: 736px) {
+
+	  .poster-row {
+	      gap: 0.75em;
+	      margin-bottom: 2em;
+	  }
+
+	  .poster-row__caption {
+	      font-size: 0.8em;
+	      padding: 0.4em 0.35em;
+	  }
+
+      }
