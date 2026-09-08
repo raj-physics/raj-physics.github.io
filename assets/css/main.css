@@ -3185,9 +3185,18 @@ input, select, textarea {
    assets/js/projects.js) styled to match the plain <a> links beside it.
    Its <template> lives inside the same <h2>. */
 
+      /* The template's base button styling has to be undone explicitly: it sets
+	 "color: #fff !important" (so the colours here need !important to win) and
+	 its own :hover / :active background-color under a more specific selector
+	 than a lone class (so the background is reset on those states too). */
+      .sidebar-modal__button,
+      .sidebar-modal__button:hover,
+      .sidebar-modal__button:active {
+	  background: none;
+      }
+
       .sidebar-modal__button {
 	  padding: 0;
-	  background: none;
 	  border: 0;
 	  border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
 	  border-radius: 0;
@@ -3196,7 +3205,7 @@ input, select, textarea {
 	  font-weight: inherit;
 	  line-height: inherit;
 	  letter-spacing: inherit;
-	  color: inherit;
+	  color: inherit !important;
 	  cursor: pointer;
 	  -webkit-appearance: none;
 	  appearance: none;
@@ -3204,7 +3213,7 @@ input, select, textarea {
       }
 
       .sidebar-modal__button:hover {
-	  color: #E27689;
+	  color: #E27689 !important;
 	  border-bottom-color: rgba(255, 255, 255, 0);
       }
 
