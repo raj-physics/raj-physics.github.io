@@ -2895,13 +2895,19 @@ input, select, textarea {
 	 the viewport: left/right pin it to that region and the auto margins centre
 	 it inside. --sidebar-width tracks #header's width at each breakpoint (see
 	 the media queries below); it is 0 under 960px, where the sidebar is
-	 off-canvas and the popup goes back to full-viewport centring. */
+	 off-canvas and the popup goes back to full-viewport centring.
+
+	 Its width tracks that region rather than being a fixed slab: 80% of the
+	 space beside the sidebar, floored at the old 920px so nothing narrows on
+	 mid-size screens (below ~1400px viewport the auto width simply fills the
+	 region anyway) and capped at 1400px so the prose does not run edge to edge
+	 on a very wide monitor. */
       .project-modal {
 	  --sidebar-width: 375px;
 	  left: var(--sidebar-width);
 	  right: 0;
 	  width: auto;
-	  max-width: 920px;
+	  max-width: clamp(920px, calc((100% - var(--sidebar-width)) * 0.8), 1400px);
 	  margin: auto;
 	  padding: 0;
 	  border: 0;
