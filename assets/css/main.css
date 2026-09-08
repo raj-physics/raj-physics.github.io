@@ -2888,14 +2888,48 @@ input, select, textarea {
 	  color: #666;
       }
 
-      /* The dialog is only a frame -- showModal() centres it and paints ::backdrop;
-	 __surface carries the panel and caps its height. */
+      /* The dialog is only a frame -- showModal() paints ::backdrop and __surface
+	 carries the panel and caps its height.
+
+	 The popup is centred in the space to the right of the fixed sidebar, not in
+	 the viewport: left/right pin it to that region and the auto margins centre
+	 it inside. --sidebar-width tracks #header's width at each breakpoint (see
+	 the media queries below); it is 0 under 960px, where the sidebar is
+	 off-canvas and the popup goes back to full-viewport centring. */
       .project-modal {
-	  width: 100%;
+	  --sidebar-width: 375px;
+	  left: var(--sidebar-width);
+	  right: 0;
+	  width: auto;
 	  max-width: 920px;
+	  margin: auto;
 	  padding: 0;
 	  border: 0;
 	  background: transparent;
+      }
+
+      @media screen and (min-width: 961px) and (max-width: 1880px) {
+
+	  .project-modal {
+	      --sidebar-width: 250px;
+	  }
+
+      }
+
+      @media screen and (min-width: 961px) and (max-width: 1320px) {
+
+	  .project-modal {
+	      --sidebar-width: 20%;
+	  }
+
+      }
+
+      @media screen and (max-width: 960px) {
+
+	  .project-modal {
+	      --sidebar-width: 0px;
+	  }
+
       }
 
       .project-modal::backdrop {
@@ -3143,4 +3177,50 @@ input, select, textarea {
 	      padding: 0.4em 0.35em;
 	  }
 
+      }
+
+/* Sidebar [Talks] popup
+   ------------------------------------------------------------------
+   The sidebar link is a <button> (it opens #project-modal via
+   assets/js/projects.js) styled to match the plain <a> links beside it.
+   Its <template> lives inside the same <h2>. */
+
+      .sidebar-modal__button {
+	  padding: 0;
+	  background: none;
+	  border: 0;
+	  border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
+	  border-radius: 0;
+	  font-family: inherit;
+	  font-size: inherit;
+	  font-weight: inherit;
+	  line-height: inherit;
+	  letter-spacing: inherit;
+	  color: inherit;
+	  cursor: pointer;
+	  -webkit-appearance: none;
+	  appearance: none;
+	  transition: color 0.35s ease-in-out, border-bottom-color 0.35s ease-in-out;
+      }
+
+      .sidebar-modal__button:hover {
+	  color: #E27689;
+	  border-bottom-color: rgba(255, 255, 255, 0);
+      }
+
+      .sidebar-modal__button:focus-visible {
+	  outline: solid 2px #8ebebc;
+	  outline-offset: 2px;
+      }
+
+      /* Venue on the left, date pushed to the right; the date never wraps, so
+	 a long venue name is what folds onto a second line. */
+      .talks-list li {
+	  display: flex;
+	  justify-content: space-between;
+	  gap: 1.5em;
+      }
+
+      .talks-list__date {
+	  white-space: nowrap;
       }
