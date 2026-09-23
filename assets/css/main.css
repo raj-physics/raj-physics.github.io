@@ -3239,3 +3239,7 @@ input, select, textarea {
       .talks-list__date {
 	  white-space: nowrap;
       }
+
+      .talks-list__type {
+	  font-weight: bold;
+      }
